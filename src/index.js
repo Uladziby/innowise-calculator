@@ -6,6 +6,8 @@ import {
   operationsButtons,
   functionsButtons,
 } from './constants.js';
+import { calculateResult } from './helpers/calculateResult.js';
+import { updateInputRemoveZeroBefore } from './helpers/updateInputRemoveZeroBefore.js';
 import './styles.scss';
 
 export const Calculator = () => {
@@ -71,7 +73,8 @@ export const Calculator = () => {
   const handleEvent = (value) => {
     if (!isNaN(value)) {
       currentInput += value;
-      displayElement.updateResult(currentInput);
+      const updatedValue = updateInputRemoveZeroBefore(currentInput);
+      displayElement.updateResult(updatedValue);
     } else if (['+', '-', '*', '/'].includes(value)) {
       if (currentInput !== '') {
         displayElement.updateCalculation(currentValue);
@@ -82,9 +85,10 @@ export const Calculator = () => {
       displayElement.updateResult(currentValue + ' ' + operator);
     } else if (value === '=') {
       if (currentInput !== '' && operator) {
+        const result = calculateResult(currentValue, currentInput, operator);
         currentInput = '';
         operator = null;
-        displayElement.updateResult(currentInput);
+        displayElement.updateResult(result);
       }
     } else if (value === 'AC') {
       currentInput = '';

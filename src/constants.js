@@ -5,6 +5,10 @@ export const functionsButtons = [
   { content: '+', type: 'button', className: ['button', 'btn_fun'] },
 ];
 
+export const resultButton = [
+  { content: '=', type: 'button', className: ['button', 'btn_result'] },
+];
+
 export const operationsButtons = [
   { content: 'AC', type: 'button', className: ['button', 'btn_fun'] },
   { content: '%', type: 'button', className: ['button', 'btn_fun'] },

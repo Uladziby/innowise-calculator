@@ -12,14 +12,14 @@ export const DisplayComponent = (container, value) => {
     parentNode: displayContainer.element,
     tag: 'div',
     id: 'displayCalculation',
-    className: ['display'],
+    className: ['display_container__calculation'],
   });
 
   const display = BaseComponent({
     parentNode: displayContainer.element,
     tag: 'div',
     id: 'display',
-    className: ['display'],
+    className: ['display_container__result'],
     content: `${value}`,
   });
 

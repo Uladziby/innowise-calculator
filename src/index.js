@@ -1,11 +1,12 @@
 import { BaseComponent } from './components/BaseComponent.js';
 import { DisplayComponent } from './components/DisplayComponent/DisplayComponent.js';
-import { Button } from './components/Button/Button.js';
 import {
   numbersButtons,
   operationsButtons,
   functionsButtons,
+  resultButton,
 } from './constants.js';
+import { renderButtons } from './helpers/renderButtons.js';
 import { calculateResult } from './helpers/calculateResult.js';
 import { updateInputRemoveZeroBefore } from './helpers/updateInputRemoveZeroBefore.js';
 import './styles.scss';
@@ -28,46 +29,26 @@ export const Calculator = () => {
   const buttonsContainer = BaseComponent({
     parentNode: container.element,
     tag: 'div',
-    className: ['buttons-container'],
+    className: ['buttons_container'],
   });
-
-  const resultButton = Button({
-    parentNode: buttonsContainer.element,
-    content: '=',
-    className: ['button', 'btn_result'],
-    onClick: () => {
-      handleEvent('=');
-    },
-  });
-
-  const renderButtons = (buttons, container) => {
-    buttons.forEach((button) => {
-      Button({
-        parentNode: container.element,
-        ...button,
-        onClick: () => {
-          handleEvent(button.content);
-        },
-      });
-    });
-  };
 
   const numbersButtonsContainer = BaseComponent({
     parentNode: buttonsContainer.element,
     tag: 'div',
-    className: ['buttons-container_left'],
+    className: ['buttons_container__left'],
   });
 
   const functionsButtonsContainer = BaseComponent({
     parentNode: buttonsContainer.element,
     tag: 'div',
-    className: ['buttons-container_right'],
+    className: ['buttons_container__right'],
   });
 
   const render = () => {
-    renderButtons(operationsButtons, numbersButtonsContainer);
-    renderButtons(numbersButtons, numbersButtonsContainer);
-    renderButtons(functionsButtons, functionsButtonsContainer);
+    renderButtons(operationsButtons, numbersButtonsContainer, handleEvent);
+    renderButtons(numbersButtons, numbersButtonsContainer, handleEvent);
+    renderButtons(functionsButtons, functionsButtonsContainer, handleEvent);
+    renderButtons(resultButton, buttonsContainer, handleEvent);
   };
 
   const handleEvent = (value) => {

@@ -1,11 +1,18 @@
 import { BaseComponent } from '../BaseComponent.js';
 import './styles.scss';
 
-export const DisplayComponent = (container) => {
+export const DisplayComponent = (container, value) => {
   const displayContainer = BaseComponent({
     parentNode: container.element,
     tag: 'div',
     className: ['display_container'],
+  });
+
+  const displayCalculation = BaseComponent({
+    parentNode: displayContainer.element,
+    tag: 'div',
+    id: 'displayCalculation',
+    className: ['display'],
   });
 
   const display = BaseComponent({
@@ -13,8 +20,16 @@ export const DisplayComponent = (container) => {
     tag: 'div',
     id: 'display',
     className: ['display'],
-    content: '0',
+    content: `${value}`,
   });
 
-  return display;
+  const updateResult = (newValue) => {
+    display.setContent(newValue);
+  };
+
+  const updateCalculation = (calculation) => {
+    displayCalculation.setContent(calculation);
+  };
+
+  return { display, updateResult, updateCalculation };
 };

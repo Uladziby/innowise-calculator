@@ -4,12 +4,12 @@ export function BaseComponent({
   className = [],
   styles = '',
   content = '',
-  id = '',
+  id,
 }) {
   const element = document.createElement(tag);
   element.classList.add(...className);
   element.innerHTML = `${content}`;
-  element.id = id;
+  if (id) element.id = id;
 
   if (parentNode) {
     parentNode.appendChild(element);

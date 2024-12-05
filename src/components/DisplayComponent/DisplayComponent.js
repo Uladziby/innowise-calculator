@@ -3,11 +3,10 @@ import './styles.scss';
 
 export const DisplayComponent = (container, value) => {
   const displayContainer = BaseComponent({
-    parentNode: container.element,
+    parentNode: container,
     tag: 'div',
     className: ['display_container'],
   });
-
   const displayCalculation = BaseComponent({
     parentNode: displayContainer.element,
     tag: 'div',

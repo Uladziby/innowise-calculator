@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0.5px solid #191b1d;
-  background: #1e2022;
-  color: #fff;
   font-weight: 300;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  border: 0.5px solid var(--bg-color);
   font-size: 24px;
   cursor: pointer;
 

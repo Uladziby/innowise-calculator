@@ -45,58 +45,92 @@ export function Calculator(appContainer) {
   };
 
   const handleEvent = (value) => {
-    if (!isNaN(value)) {
-      currentInput += value;
-      const updatedValue = updateInputRemoveZeroBefore(currentInput);
-      displayElement.updateResult(updatedValue);
-    } else if (['+', '-', '*', '/'].includes(value)) {
-      if (currentInput !== '') {
-        displayElement.updateCalculation(currentValue);
-        currentValue = parseFloat(currentInput);
-        currentInput = '';
+    switch (true) {
+      case !isNaN(value): {
+        currentInput += value;
+        calculationInput += value;
+        const updatedValue = updateInputRemoveZeroBefore(currentInput);
+        displayElement.updateResult(updatedValue);
+        displayElement.updateCalculation(calculationInput);
+        break;
       }
-      operator = value;
-      displayElement.updateResult(currentValue + ' ' + operator);
-    } else if (value === '=') {
-      if (currentInput !== '' && operator) {
-        const result = calculateResult(currentValue, currentInput, operator);
+
+      case ['+', '-', '*', '/'].includes(value):
+        if (currentInput !== '') {
+          currentValue = parseFloat(currentInput);
+        }
+        operator = value;
+        calculationInput = currentValue + ' ' + operator + ' ';
         currentInput = '';
+        displayElement.updateResult(currentValue);
+        displayElement.updateCalculation(calculationInput);
+        break;
+
+      case value === '=':
+        if (currentInput !== '' && operator) {
+          const result = calculateResult(currentValue, currentInput, operator);
+          calculationInput += ' =';
+          displayElement.updateCalculation(calculationInput);
+          displayElement.updateResult(result);
+          currentValue = result;
+          currentInput = '';
+          operator = null;
+          calculationInput = result.toString();
+        }
+        break;
+
+      case value === 'AC':
+        currentInput = '';
+        currentValue = 0;
         operator = null;
-        displayElement.updateResult(result);
-      }
-    } else if (value === 'AC') {
-      currentInput = '';
-      currentValue = 0;
-      operator = null;
-      displayElement.updateResult(currentValue);
-    } else if (value === '+/-') {
-      if (currentInput !== '') {
-        currentInput = (parseFloat(currentInput) * -1).toString();
-        displayElement.updateResult(currentInput);
-      } else if (currentValue !== 0) {
-        currentValue *= -1;
+        calculationInput = '';
         displayElement.updateResult(currentValue);
-      }
-    } else if (value === '%') {
-      if (operator === null) {
-        displayElement.updateResult(0);
-        currentInput = 0;
-      }
-      if (currentInput !== '') {
-        currentInput = (
-          (parseFloat(currentInput) / currentValue) *
-          100
-        ).toString();
-        displayElement.updateResult(currentInput);
-      } else if (currentValue !== 0) {
-        currentValue /= 100;
-        displayElement.updateResult(currentValue);
-      }
-    } else if (value === ',') {
-      if (currentInput !== '' && !currentInput.includes('.')) {
-        currentInput += '.';
-        displayElement.updateResult(currentInput);
-      }
+        displayElement.updateCalculation('');
+        break;
+
+      case value === '+/-':
+        if (currentInput !== '') {
+          currentInput = (parseFloat(currentInput) * -1).toString();
+          calculationInput =
+            calculationInput.slice(0, -currentInput.length) + currentInput;
+          displayElement.updateResult(currentInput);
+          displayElement.updateCalculation(calculationInput);
+        } else if (currentValue !== 0) {
+          currentValue *= -1;
+          calculationInput = currentValue.toString();
+          displayElement.updateResult(currentValue);
+          displayElement.updateCalculation(calculationInput);
+        }
+        break;
+
+      case value === '%':
+        if (currentInput !== '') {
+          currentInput = (
+            (parseFloat(currentInput) / 100) *
+            currentValue
+          ).toString();
+          calculationInput += ' %';
+          displayElement.updateResult(currentInput);
+          displayElement.updateCalculation(calculationInput);
+        } else if (currentValue !== 0) {
+          currentValue /= 100;
+          calculationInput = currentValue.toString();
+          displayElement.updateResult(currentValue);
+          displayElement.updateCalculation(calculationInput);
+        }
+        break;
+
+      case value === ',':
+        if (currentInput !== '' && !currentInput.includes('.')) {
+          currentInput += '.';
+          calculationInput += '.';
+          displayElement.updateResult(currentInput);
+          displayElement.updateCalculation(calculationInput);
+        }
+        break;
+
+      default:
+        console.warn(`Unhandled input: ${value}`);
     }
   };
 

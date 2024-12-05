@@ -1,7 +1,7 @@
-import './components/ThemeButton/styles.scss';
 import { Calculator } from './components/Calculator/Calculator.js';
 import { ThemeButton } from './components/ThemeButton/ThemeButton.js';
 import { BaseComponent } from './components/BaseComponent.js';
+import './components/ThemeButton/styles.scss';
 import './styles.scss';
 
 function runApp() {

@@ -1,0 +1,38 @@
+.calculator {
+  opacity: 0;
+  animation: 1s bounceIn;
+  animation-fill-mode: forwards;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #ffffff;
+  box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.5);
+  background-color: var(--bg-color);
+}
+
+.buttons_container {
+  position: relative;
+  display: flex;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+
+  &__left {
+    display: grid;
+    grid: repeat(5, 67px) / repeat(3, 85px);
+  }
+  &__right {
+    display: grid;
+    grid: repeat(5, 67px) / repeat(1, 85px);
+  }
+}
+
+.btn_result {
+  position: absolute;
+  right: -12px;
+  bottom: -12px;
+  width: calc(43% * 1.25);
+  height: calc(100% * 0.25);
+  background: #1939f6;
+  border-bottom-right-radius: 8px;
+  border: 0.5px rgba(0, 0, 0, 0.0001);
+}

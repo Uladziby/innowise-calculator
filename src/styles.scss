@@ -1,0 +1,33 @@
+:root {
+  --bg-color: #171923;
+  --bg-light: #232535;
+  --font-color: #c5cddb;
+  --font-light: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--font-light);
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg-color);
+  font-size: 36px;
+  transition: all 500ms;
+  height: 100%;
+}
+
+.lightMode {
+  --bg-color: #e8e6dc;
+  --bg-light: #dcdaca;
+  --font-color: #3d3d3d;
+  --font-light: #202020;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

@@ -1,0 +1,17 @@
+.theme-switcher {
+  &__button {
+    list-style: none;
+    display: inline;
+    border-radius: 1rem;
+    border: none;
+    line-height: 1.5rem;
+    padding: 0.5rem 0.75rem;
+    margin: 1rem;
+    transition: all 250ms;
+    cursor: pointer;
+  }
+  &__button:hover {
+    color: var(--bg-color);
+    background-color: var(--font-light);
+  }
+}

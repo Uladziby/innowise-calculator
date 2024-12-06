@@ -3,6 +3,7 @@ import { ThemeButton } from './components/ThemeButton/ThemeButton.js';
 import { BaseComponent } from './components/BaseComponent.js';
 import './components/ThemeButton/styles.scss';
 import './styles.scss';
+import './animations.scss';
 
 function runApp() {
   const app = document.querySelector('#app');
@@ -23,4 +24,3 @@ function runApp() {
 }
 
 runApp();
-// decompose logic to anather files
